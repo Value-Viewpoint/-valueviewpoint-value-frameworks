@@ -1,0 +1,77 @@
+# Value Driver Schema
+# This schema defines the atomic unit of value engineering.
+# It is designed to be business-first, finance-traceable, and tool-agnostic.
+
+value_driver:
+  id: string                # Unique identifier (e.g., "o2c_cycle_time_reduction")
+  name: string              # Human-readable name
+  description: string       # Plain-language explanation of the value driver
+
+  category:                 # Primary value category
+    enum:
+      - labor_productivity
+      - cycle_time
+      - cost_reduction
+      - revenue_enablement
+      - risk_reduction
+      - working_capital
+      - quality_improvement
+
+  business_context:
+    process: string         # e.g., Order-to-Cash, Procure-to-Pay
+    function: string        # e.g., Finance, Operations, Sales, IT
+    industry: string        # Optional, if industry-specific
+
+  baseline:
+    metric_name: string     # What is being measured
+    value: number           # Current baseline value
+    unit: string            # e.g., hours, days, %, $
+    data_source: string     # Where baseline data comes from
+    measurement_period: string  # e.g., per month, per year
+
+  target:
+    value: number           # Expected post-change value
+    rationale: string       # Why this target is achievable
+
+  delta:
+    calculation: string     # How delta is derived (plain math explanation)
+
+  volume:
+    quantity: number        # Number of transactions, cases, users, etc.
+    frequency: string       # e.g., per year, per month
+
+  unit_economics:
+    unit_cost: number       # Cost or value per unit
+    currency: string        # ISO currency code (e.g., USD, EUR)
+    source: string          # Cost source or assumption
+
+  economic_impact:
+    formula: string         # Explicit formula for annual impact
+    annual_value: number   # Calculated annual economic impact
+    impact_type:
+      enum:
+        - hard_savings
+        - cost_avoidance
+        - productivity_gain
+        - revenue_uplift
+        - risk_adjusted_value
+
+  confidence:
+    level:
+      enum:
+        - low
+        - medium
+        - high
+    rationale: string       # Why this confidence level was chosen
+
+  risk_factors:
+    - description: string   # Key risks or dependencies
+      mitigation: string   # How risk is mitigated
+
+  benchmarks:
+    reference: string       # Public or directional benchmark reference
+    applicability: string  # Why benchmark is relevant (or not)
+
+  notes:
+    assumptions: string    # Explicit assumptions
+    exclusions: string     # What is not included
